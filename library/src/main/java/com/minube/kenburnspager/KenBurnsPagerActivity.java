@@ -141,8 +141,17 @@ public abstract class KenBurnsPagerActivity extends AppCompatActivity {
         });
     }
 
-    public void setHeaderLayout(View headerLayoutView) {
-        coordinatorLayout.addView(headerLayoutView);
+    public void hideToolbarTitle() {
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    public void showToolbarTitle() {
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+    }
+
+    public void replaceHeaderTitleByHeaderLayout(View headerLayoutView) {
+        collapsingToolbarLayout.setTitleEnabled(false);
+        collapsingToolbarLayout.addView(headerLayoutView);
     }
 
     private void setTaskBarColored(@ColorInt int vibrantDarkColor) {

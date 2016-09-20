@@ -1,7 +1,9 @@
 package com.minube.kenburnspager.sample;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.View;
 import com.minube.kenburnspager.KenBurnsPagerActivity;
 import com.minube.kenburnspager.listener.AppBarStateChangeListener;
 
@@ -16,10 +18,24 @@ public class MainActivity extends KenBurnsPagerActivity {
         addTabFragment("hola2", new SampleFragment(1));
         addTabFragment("hola5", new SampleFragment(100));
         addTabFragment("hola4", new SampleFragment(1));
+
+        addCustomHeaderView();
+    }
+
+    private void addCustomHeaderView() {
+        LayoutInflater inflater =
+            (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View inflate = inflater.inflate(R.layout.custom_header, null);
+        replaceHeaderTitleByHeaderLayout(inflate);
     }
 
     @Override protected void onCollapsingStateChanged(AppBarStateChangeListener.State state) {
-        Toast.makeText(this, "change" + state.toString(), Toast.LENGTH_LONG).show();
+        if (state != AppBarStateChangeListener.State.HALF_COLLAPSED) {
+            hideToolbarTitle();
+        } else {
+            showToolbarTitle();
+        }
     }
 
     @Override protected String getHeaderTitle() {
