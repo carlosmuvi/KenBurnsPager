@@ -1,7 +1,9 @@
 package com.minube.kenburnspager.sample;
 
 import android.os.Bundle;
+import android.widget.Toast;
 import com.minube.kenburnspager.KenBurnsPagerActivity;
+import com.minube.kenburnspager.listener.AppBarStateChangeListener;
 
 public class MainActivity extends KenBurnsPagerActivity {
 
@@ -14,5 +16,13 @@ public class MainActivity extends KenBurnsPagerActivity {
         addTabFragment("hola2", new SampleFragment(1));
         addTabFragment("hola5", new SampleFragment(100));
         addTabFragment("hola4", new SampleFragment(1));
+    }
+
+    @Override protected void onCollapsingStateChanged(AppBarStateChangeListener.State state) {
+        Toast.makeText(this, "change" + state.toString(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override protected String getHeaderTitle() {
+        return "Iglesia de Santa María de Nuestra Señora de la Cabeza";
     }
 }

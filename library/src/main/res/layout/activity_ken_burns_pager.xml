@@ -11,15 +11,18 @@
       android:layout_height="wrap_content"
       android:fitsSystemWindows="true"
       android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <android.support.design.widget.CollapsingToolbarLayout
+    <net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
         android:id="@+id/collapsing_toolbar"
         android:layout_width="match_parent"
         android:layout_height="360dp"
         android:fitsSystemWindows="true"
-        app:collapsedTitleGravity="top"
+        app:collapsedTitleGravity="top|left"
         app:contentScrim="?attr/colorPrimary"
-        app:expandedTitleGravity="center"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        app:expandedTitleGravity="top|center_horizontal"
+        app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
+        app:collapsedTitleTextAppearance="@style/TextAppearance.CollapsedTitle"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:maxLines="3">
       <com.flaviofaria.kenburnsview.KenBurnsView
           android:id="@+id/header_image"
           android:layout_width="match_parent"
@@ -36,7 +39,7 @@
           android:minHeight="?attr/actionBarSize"
           app:layout_collapseMode="pin"
           app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-          app:titleMarginTop="20dp"/>
+          app:titleMarginTop="16dp"/>
       <android.support.design.widget.TabLayout
           android:id="@+id/tablayout"
           android:layout_width="match_parent"
@@ -46,7 +49,7 @@
           app:tabIndicatorColor="@android:color/white"
           app:tabMaxWidth="0dp"
           app:tabMode="fixed"/>
-    </android.support.design.widget.CollapsingToolbarLayout>
+    </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
   </android.support.design.widget.AppBarLayout>
   <android.support.v4.view.ViewPager
       android:id="@+id/viewpager"
