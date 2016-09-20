@@ -5,12 +5,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
@@ -24,6 +26,7 @@ public class KenBurnsPagerActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbarLayout;
+    private CoordinatorLayout coordinatorLayout;
 
     private KenBurnsPagerAdapter kenBurnsPagerAdapter;
 
@@ -38,6 +41,17 @@ public class KenBurnsPagerActivity extends AppCompatActivity {
         initCollapsingToolbar();
     }
 
+    //VIEW SETUP METHODS
+
+    private void bindViews() {
+        headerImageView = (KenBurnsView) findViewById(R.id.header_image);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+    }
+
     private void initToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Parallax Tabs");
@@ -45,7 +59,7 @@ public class KenBurnsPagerActivity extends AppCompatActivity {
     }
 
     private void initCollapsingToolbar() {
-        collapsingToolbarLayout.setTitleEnabled(false);
+        collapsingToolbarLayout.setTitleEnabled(true);
     }
 
     private void initTabLayout() {
@@ -70,13 +84,7 @@ public class KenBurnsPagerActivity extends AppCompatActivity {
         viewPager.setAdapter(kenBurnsPagerAdapter);
     }
 
-    private void bindViews() {
-        headerImageView = (KenBurnsView) findViewById(R.id.header_image);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        tabLayout = (TabLayout) findViewById(R.id.tablayout);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-    }
+    // EXPOSED METHODS
 
     public void addTabFragment(@StringRes int tabTitle, Fragment tabFragment) {
         addTabFragment(getResources().getString(tabTitle), tabFragment);
@@ -108,5 +116,9 @@ public class KenBurnsPagerActivity extends AppCompatActivity {
                 super.onLoadFailed(e, errorDrawable);
             }
         });
+    }
+
+    public void setHeaderLayout(View headerLayoutView) {
+        coordinatorLayout.addView(headerLayoutView);
     }
 }
