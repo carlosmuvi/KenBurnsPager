@@ -1,6 +1,7 @@
 package com.minube.kenburnspager.sample;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,21 +20,21 @@ import java.util.List;
 
 public class SampleFragment extends Fragment {
 
-    int color;
+    int items;
     SimpleRecyclerAdapter adapter;
 
     public SampleFragment() {
     }
 
-    @SuppressLint("ValidFragment") public SampleFragment(int color) {
-        this.color = color;
+    @SuppressLint("ValidFragment") public SampleFragment(int items) {
+        this.items = items;
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sample, container, false);
 
         final FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.dummyfrag_bg);
-        frameLayout.setBackgroundColor(color);
+        frameLayout.setBackgroundColor(Color.LTGRAY);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.dummyfrag_scrollableview);
 
@@ -42,7 +43,7 @@ public class SampleFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < items; i++) {
             list.add("hola");
         }
 

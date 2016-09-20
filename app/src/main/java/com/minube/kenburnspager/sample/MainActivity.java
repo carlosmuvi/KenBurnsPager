@@ -10,9 +10,9 @@ public class MainActivity extends KenBurnsPagerActivity {
         setHeaderImage(
             "http://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-140mmf_35-56g_ed_vr/img/sample"
                 + "/sample1_l.jpg");
-        addTabFragment("hola1", new SampleFragment(getResources().getColor(android.R.color.background_dark)));
-        addTabFragment("hola2", new SampleFragment(getResources().getColor(android.R.color.background_dark)));
-        addTabFragment("hola5", new SampleFragment(getResources().getColor(android.R.color.background_dark)));
-        addTabFragment("hola4", new SampleFragment(getResources().getColor(android.R.color.background_dark)));
+        addTabFragment("hola1", new SampleFragment(100));
+        addTabFragment("hola2", new SampleFragment(1));
+        addTabFragment("hola5", new SampleFragment(100));
+        addTabFragment("hola4", new SampleFragment(1));
     }
 }
