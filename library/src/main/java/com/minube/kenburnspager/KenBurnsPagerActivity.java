@@ -2,7 +2,9 @@ package com.minube.kenburnspager;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.StringRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -13,6 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
@@ -123,6 +129,7 @@ public abstract class KenBurnsPagerActivity extends AppCompatActivity {
                         int vibrantDarkColor =
                             palette.getDarkVibrantColor(getResources().getColor(android.R.color.holo_green_light));
                         collapsingToolbarLayout.setContentScrimColor(vibrantColor);
+                        setTaskBarColored(vibrantDarkColor);
                         collapsingToolbarLayout.setStatusBarScrimColor(vibrantDarkColor);
                     }
                 });
@@ -136,5 +143,31 @@ public abstract class KenBurnsPagerActivity extends AppCompatActivity {
 
     public void setHeaderLayout(View headerLayoutView) {
         coordinatorLayout.addView(headerLayoutView);
+    }
+
+    private void setTaskBarColored(@ColorInt int vibrantDarkColor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //status bar height
+            int statusBarHeight = getStatusBarHeight();
+
+            View view = new View(this);
+            view.setLayoutParams(
+                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            view.getLayoutParams().height = statusBarHeight;
+            ((ViewGroup) w.getDecorView()).addView(view);
+            view.setBackgroundColor(vibrantDarkColor);
+        }
+    }
+
+    private int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }

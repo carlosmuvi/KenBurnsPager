@@ -20,7 +20,6 @@
         app:contentScrim="?attr/colorPrimary"
         app:expandedTitleGravity="top|center_horizontal"
         app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
-        app:collapsedTitleTextAppearance="@style/TextAppearance.CollapsedTitle"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
         app:maxLines="3">
       <com.flaviofaria.kenburnsview.KenBurnsView
